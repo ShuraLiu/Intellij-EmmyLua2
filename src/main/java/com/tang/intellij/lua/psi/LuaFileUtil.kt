@@ -32,7 +32,7 @@ object LuaFileUtil {
 
     private val pluginVirtualDirectory: VirtualFile?
         get() {
-            val descriptor = PluginManagerCore.getPlugin(PluginId.getId("com.cppcxy.Intellij-EmmyLua"))
+            val descriptor = PluginManagerCore.getPlugin(PluginId.getId("com.cppcxy.Intellij-EmmyLuaForX7"))
             if (descriptor != null) {
                 return VirtualFileManager.getInstance().findFileByNioPath(descriptor.pluginPath)
             }

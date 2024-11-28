@@ -8,7 +8,7 @@ import java.io.File
 
 object EmmyLuaAnalyzerAdaptor {
     private val pluginSource: String?
-        get() = PluginManagerCore.getPlugin(PluginId.getId("com.cppcxy.Intellij-EmmyLua"))?.pluginPath?.toFile()?.path
+        get() = PluginManagerCore.getPlugin(PluginId.getId("com.cppcxy.Intellij-EmmyLuaForX7"))?.pluginPath?.toFile()?.path
 
     private val exe: String
         get() {
