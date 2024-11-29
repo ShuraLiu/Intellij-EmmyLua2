@@ -1,11 +1,18 @@
 import de.undercouch.gradle.tasks.download.Download
 import org.gradle.internal.os.OperatingSystem
 
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.0.0-Beta4"
     id("org.jetbrains.intellij") version "1.17.2"
     id("de.undercouch.download") version "5.3.0"
+    id("dev.bmac.intellij.plugin-uploader") version "1.3.5"
 }
 
 data class BuildData(
@@ -34,6 +41,7 @@ val buildDataList = listOf(
 group = "com.cppcxy"
 val emmyluaAnalyzerVersion = "0.7.3"
 val emmyDebuggerVersion = "1.8.3"
+val selfVersion = "0.8.1"
 
 val emmyluaAnalyzerProjectUrl = "https://github.com/CppCXY/EmmyLuaAnalyzer"
 val emmyluaCodeStyleProjectUrl = "https://github.com/CppCXY/EmmyLuaCodeStyle"
@@ -44,7 +52,7 @@ val buildVersionData = buildDataList.find { it.ideaSDKShortVersion == buildVersi
 
 val runnerNumber = System.getenv("RUNNER_NUMBER") ?: "Dev"
 
-version = "${emmyluaAnalyzerVersion}.${runnerNumber}-IDEA${buildVersion}"
+version = "${selfVersion}.${runnerNumber}-IDEA${buildVersion}"
 
 
 //task("download", type = Download::class) {
@@ -187,6 +195,33 @@ tasks {
     buildPlugin {
         dependsOn("install")
     }
+
+    generateBlockMap {
+        // Depend on either signPlugin or buildPlugin, depending on which task provides the file in the uploadPlugin
+        dependsOn(project.tasks.named("buildPlugin"))
+    }
+
+    uploadPlugin {
+//        def signPluginTask = project.tasks.named("buildPlugin").get() as SignPluginTask
+        // Get the plugin distribution file from the signPlugin task provided from the gradle-intellij-plugin
+//        def archive = signPluginTask.outputArchiveFile.asFile
+        // If you do not wish to sign the plugin, you can use the buildPlugin output instead and specify `archive.archivePath` for the file argument
+        val archive = project.tasks.buildPlugin.get().archiveFile
+
+        // For security, do not hard code usernames or passwords in source control, instead load them through the gradle properties:
+        // <code> findProperty('some.gradle.property') as String </code>
+        // or through Environment variables:
+        // <code> System.getenv('SOME_ENVIRONMENT_VARIABLE') </code>
+        url.set("http://10.10.225.59:8080/uploads.html")
+        pluginName.set("EmmyLuaForX7")
+        file.set(archive.get())
+        pluginId.set("com.cppcxy.Intellij-EmmyLuaForX7")
+        version.set(project.version.toString())
+        pluginDescription.set(file("README.md").readText())
+        changeNotes.set(file("CHANGELOG.md").readText())
+        sinceBuild.set("232")
+    }
+
     // fix by https://youtrack.jetbrains.com/issue/IDEA-325747/IDE-always-actively-disables-LSP-plugins-if-I-ask-the-plugin-to-return-localized-diagnostic-messages.
     runIde {
         autoReloadPlugins.set(false)

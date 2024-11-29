@@ -27,6 +27,28 @@
 
     </ul>
   ]]></description>
+    <change-notes><![CDATA[
+    Change Log.<br>
+    <h1>0.8.1</h1>
+    <h2>Fix</h2>
+    <ul>
+    <li> Lua诊断可能触发异常</li>
+    </ul>
+    <h1>0.8.0</h1>
+    <h2>New</h2>
+    <ul>
+    <li> 新增EventBus接口对称调用的诊断</li>
+    <li> 新增InputSystem接口对称调用的诊断</li>
+    <li> 新增BuffId合法性诊断</li>
+    <li> 新增Construct/Destruct父类调用诊断</li>
+    </ul>
+    <h2>Fix</h2>
+    <ul>
+    <li> Lua根目录是项目子目录时Debugger无法找到Lua文件</li>
+    </ul>
+  ]]>
+
+    </change-notes>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
