@@ -17,11 +17,14 @@
 package com.tang.intellij.lua.psi
 
 import com.intellij.ide.plugins.PluginManagerCore
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
+import com.intellij.psi.search.FilenameIndex
+import com.intellij.psi.search.ProjectAndLibrariesScope
 import java.io.File
 
 /**
@@ -63,17 +66,57 @@ object LuaFileUtil {
             if (virtualFile != null && virtualFile.exists()) {
                 return virtualFile
             }
-            return null
+
+            var perfect: VirtualFile? = null
+            val names = fixedShortUrl.split('/')
+            val fileName = names.lastOrNull()
+            if (fileName != null) {
+                ApplicationManager.getApplication().runReadAction {
+                    var perfectMatch = Int.MAX_VALUE
+                    val files = FilenameIndex.getVirtualFilesByName(fileName, ProjectAndLibrariesScope(project))
+                    for (file in files) {
+                        val path = file.canonicalPath
+                        if (path != null && perfectMatch > path.length && path.endsWith(fileName)) {
+                            perfect = file
+                            perfectMatch = path.length
+                        }
+                    }
+                }
+            }
+            return perfect
         }
         else {
             val extensions = LuaFileManager.extensions
             for (extension in extensions) {
-                val fileName = if (extension.isEmpty()) fixedShortUrl else "$fixedShortUrl.$extension"
+                val fileName = if (extension.isEmpty()) fixedShortUrl else "$fixedShortUrl$extension"
                 val virtualFile = VfsUtil.findRelativeFile(fileName, project.baseDir)
                 if (virtualFile != null && virtualFile.exists()) {
                     return virtualFile
                 }
             }
+
+            var perfect: VirtualFile? = null
+            val names = fixedShortUrl.split('/')
+            val fileName = names.lastOrNull()
+            if (fileName != null) {
+                ApplicationManager.getApplication().runReadAction {
+                    var perfectMatch = Int.MAX_VALUE
+                    for (extName in extensions) {
+                        val files = FilenameIndex.getVirtualFilesByName("$fileName$extName", ProjectAndLibrariesScope(project))
+                        for (file in files) {
+                            val path = file.canonicalPath
+                            if (path != null && perfectMatch > path.length && path.endsWith("$fixedShortUrl$extName")) {
+                                perfect = file
+                                perfectMatch = path.length
+                            }
+                        }
+
+                        if (perfect != null)
+                            break
+                    }
+                }
+            }
+            return perfect
         }
         return null
     }
