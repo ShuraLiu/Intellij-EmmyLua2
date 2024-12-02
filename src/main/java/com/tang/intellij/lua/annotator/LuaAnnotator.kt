@@ -1,6 +1,7 @@
 package com.tang.intellij.lua.annotator
 
 
+import com.intellij.execution.target.value.constant
 import com.intellij.lang.annotation.AnnotationBuilder
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
@@ -59,7 +60,7 @@ class LuaAnnotator : Annotator {
                 var child: PsiElement? = nameList.firstChild
                 while (child != null) {
                     if (child is LuaNameDef) {
-                        newInfoAnnotation(child, "Local variable \"${child.name}\"") {
+                        newInfoAnnotation(child, "Local variable \"${child.id.text}\"") {
                             it.textAttributes(LuaHighlightingData.LOCAL_VAR)
                         }
                     }
@@ -91,7 +92,7 @@ class LuaAnnotator : Annotator {
         }
 
         override fun visitParamNameDef(o: LuaParamNameDef) {
-            newInfoAnnotation(o, "Parameter : \"${o.name}\"") {
+            newInfoAnnotation(o, "Parameter : \"${o.id.text}\"") {
                 it.textAttributes(LuaHighlightingData.PARAMETER)
             }
         }
@@ -140,13 +141,30 @@ class LuaAnnotator : Annotator {
             }
         }
 
+        override fun visitLocalFuncDef(o: LuaLocalFuncDef) {
+            super.visitLocalFuncDef(o)
+
+            val name = o.id
+
+            if (name != null) {
+                newInfoAnnotation(name, "Local function \"${name.text}\"") {
+                    it.textAttributes(LuaHighlightingData.LOCAL_FUNCTION)
+                }
+            }
+        }
+
         override fun visitNameExpr(o: LuaNameExpr) {
             super.visitNameExpr(o)
             val name = o.id.text
             if (name != null) {
-                if (name == "self") {
+                if (name == Constants.WORD_SELF) {
                     newInfoAnnotation(o, null) {
                         it.textAttributes(LuaHighlightingData.SELF)
+                    }
+                }
+                else if (name == Constants.WORD_G){
+                    newInfoAnnotation(o, "Global variable \"${name}\"") {
+                        it.textAttributes(LuaHighlightingData.GLOBAL_VAR)
                     }
                 }
             }

@@ -85,6 +85,9 @@
                 implementationClass="com.tang.intellij.lua.highlighting.LuaSyntaxHighlighterFactory"/>
         <!--        <highlightErrorFilter implementation="com.tang.intellij.lua.highlighting.LuaHighlightErrorFilter"/>-->
         <annotator language="Lua" implementationClass="com.tang.intellij.lua.annotator.LuaAnnotator"/>
+        <colorSettingsPage implementation="com.tang.intellij.lua.editor.LuaColorSettingsPage"/>
+        <additionalTextAttributes scheme="Default" file="colorSchemes/Default.xml"/>
+        <additionalTextAttributes scheme="Darcula" file="colorSchemes/Darcula.xml"/>
 
         <highlightUsagesHandlerFactory
                 implementation="com.tang.intellij.lua.codeInsight.highlighting.LuaHighlightUsagesHandlerFactory"/>
