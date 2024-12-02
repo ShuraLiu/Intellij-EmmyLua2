@@ -29,6 +29,15 @@
   ]]></description>
     <change-notes><![CDATA[
     Change Log.<br>
+    <h1>0.8.2</h1>
+    <h2>New</h2>
+    <ul>
+    <li> 增加Lua脚本颜色配置</li>
+    </ul>
+    <h2>Fix</h2>
+    <ul>
+    <li> 修复一些Lua代码着色问题</li>
+    </ul>
     <h1>0.8.1</h1>
     <h2>Fix</h2>
     <ul>
