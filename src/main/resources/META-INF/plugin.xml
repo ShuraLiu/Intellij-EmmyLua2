@@ -29,6 +29,11 @@
   ]]></description>
     <change-notes><![CDATA[
     Change Log.<br>
+    <h1>0.8.3</h1>
+    <h2>New</h2>
+    <ul>
+    <li> 新的基于语言服务器的代码着色功能</li>
+    </ul>
     <h1>0.8.2</h1>
     <h2>New</h2>
     <ul>
@@ -89,11 +94,11 @@
                 implementation="com.tang.intellij.lua.codeInsight.editorActions.StringLiteralPasteProvider"/>
 
         <!--        highlight-->
-        <lang.syntaxHighlighterFactory
-                language="Lua"
-                implementationClass="com.tang.intellij.lua.highlighting.LuaSyntaxHighlighterFactory"/>
+<!--        <lang.syntaxHighlighterFactory-->
+<!--                language="Lua"-->
+<!--                implementationClass="com.tang.intellij.lua.highlighting.LuaSyntaxHighlighterFactory"/>-->
         <!--        <highlightErrorFilter implementation="com.tang.intellij.lua.highlighting.LuaHighlightErrorFilter"/>-->
-        <annotator language="Lua" implementationClass="com.tang.intellij.lua.annotator.LuaAnnotator"/>
+<!--        <annotator language="Lua" implementationClass="com.tang.intellij.lua.annotator.LuaAnnotator"/>-->
         <colorSettingsPage implementation="com.tang.intellij.lua.editor.LuaColorSettingsPage"/>
         <additionalTextAttributes scheme="Default" file="colorSchemes/Default.xml"/>
         <additionalTextAttributes scheme="Darcula" file="colorSchemes/Darcula.xml"/>
@@ -132,7 +137,7 @@
                 implementationClass="com.redhat.devtools.lsp4ij.features.signatureHelp.LSPParameterInfoHandler"/>
         <!-- LSP textDocument/documentSymbol -->
         <lang.psiStructureViewFactory
-                language="EmmyLua"
+                language="Lua"
                 implementationClass="com.redhat.devtools.lsp4ij.features.documentSymbol.LSPDocumentSymbolStructureViewFactory"/>
 
     </extensions>
@@ -148,6 +153,8 @@
         </server>
         <languageMapping language="Lua"
                          serverId="EmmyLua"/>
+        <semanticTokensColorsProvider serverId="EmmyLua"
+                                      class="com.cppcxy.ide.lsp.EmmyLuaSemanticTokensColorsProvider"/>
     </extensions>
 
     <actions>

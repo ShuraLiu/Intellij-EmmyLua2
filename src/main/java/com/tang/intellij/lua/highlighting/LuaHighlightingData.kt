@@ -34,9 +34,9 @@ object LuaHighlightingData {
 
     val LOCAL_VAR = TextAttributesKey.createTextAttributesKey("LUA_LOCAL_VAR", DefaultLanguageHighlighterColors.LOCAL_VARIABLE)
     val LOCAL_FUNCTION = TextAttributesKey.createTextAttributesKey("LUA_LOCAL_FUNC", DefaultLanguageHighlighterColors.LOCAL_VARIABLE)
-    val PARAMETER = TextAttributesKey.createTextAttributesKey("LUA_PARAMETER", CustomHighlighterColors.CUSTOM_KEYWORD3_ATTRIBUTES)
+    val PARAMETER = TextAttributesKey.createTextAttributesKey("LUA_PARAMETER", DefaultLanguageHighlighterColors.PARAMETER)
     val FIELD = TextAttributesKey.createTextAttributesKey("LUA_FIELD", DefaultLanguageHighlighterColors.INSTANCE_FIELD)
-    val GLOBAL_FUNCTION = TextAttributesKey.createTextAttributesKey("LUA_GLOBAL_FUNCTION_ID", DefaultLanguageHighlighterColors.STATIC_FIELD)
+    val GLOBAL_FUNCTION = TextAttributesKey.createTextAttributesKey("LUA_GLOBAL_FUNCTION_ID", DefaultLanguageHighlighterColors.STATIC_METHOD)
     val GLOBAL_VAR = TextAttributesKey.createTextAttributesKey("LUA_GLOBAL_VAR", DefaultLanguageHighlighterColors.GLOBAL_VARIABLE)
     val KEYWORD = TextAttributesKey.createTextAttributesKey("LUA_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
     val SELF = TextAttributesKey.createTextAttributesKey("LUA_SELF", CustomHighlighterColors.CUSTOM_KEYWORD2_ATTRIBUTES)
