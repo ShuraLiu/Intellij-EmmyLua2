@@ -99,13 +99,14 @@ class EmmyLuaSemanticTokensColorsProvider : SemanticTokensColorsProvider {
             "label" -> return SemanticTokensHighlightingColors.LABEL
             "comment" -> return SemanticTokensHighlightingColors.COMMENT
             "string" -> return SemanticTokensHighlightingColors.STRING
-            "keyword" -> return SemanticTokensHighlightingColors.KEYWORD
-            "number" -> return SemanticTokensHighlightingColors.NUMBER
+            "keyword" -> return LuaHighlightingData.KEYWORD
+            "number" -> return LuaHighlightingData.NUMBER
             "regexp" -> return SemanticTokensHighlightingColors.REGEXP
             "modifier" -> return SemanticTokensHighlightingColors.MODIFIER
-            "operator" -> return SemanticTokensHighlightingColors.OPERATOR
+            "operator" -> return LuaHighlightingData.OPERATORS
             "self" -> return LuaHighlightingData.SELF
             "_G" -> return LuaHighlightingData.GLOBAL_VAR
+            "upvalue" -> return LuaHighlightingData.UP_VALUE
             else -> return null
         }
     }
