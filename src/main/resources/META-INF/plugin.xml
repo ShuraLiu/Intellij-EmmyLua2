@@ -29,6 +29,15 @@
   ]]></description>
     <change-notes><![CDATA[
     Change Log.<br>
+    <h1>0.8.4</h1>
+    <h2>New</h2>
+    <ul>
+    <li> 支持UpValue着色</li>
+    </ul>
+    <h2>Fix</h2>
+    <ul>
+    <li> 修复一些对象没有被正常着色的问题</li>
+    </ul>
     <h1>0.8.3</h1>
     <h2>New</h2>
     <ul>
