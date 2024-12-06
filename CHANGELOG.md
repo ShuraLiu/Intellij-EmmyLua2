@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.8.5
+### New
+* 增加EmmyLua自定义协议处理
+* 现在EmmyLua初始化时通过IDE底部ProgressBar显示进度
+
 ## 0.8.4
 ### New
 * 支持UpValue着色

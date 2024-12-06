@@ -28,7 +28,13 @@
     </ul>
   ]]></description>
     <change-notes><![CDATA[
-    Change Log.<br>
+    Change Log<br>
+    <h1>0.8.5</h1>
+    <h2>New</h2>
+    <ul>
+    <li> 增加EmmyLua自定义协议处理</li>
+    <li> 现在EmmyLua初始化时通过IDE底部ProgressBar显示进度</li>
+    </ul>
     <h1>0.8.4</h1>
     <h2>New</h2>
     <ul>
