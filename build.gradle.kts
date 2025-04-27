@@ -31,17 +31,17 @@ data class BuildData(
 
 val buildDataList = listOf(
     BuildData(
-        ideaSDKShortVersion = "242",
-        ideaSDKVersion = "2024.2",
+        ideaSDKShortVersion = "251",
+        ideaSDKVersion = "2025.1",
         sinceBuild = "232",
-        untilBuild = "243.*",
+        untilBuild = "251.*",
     )
 )
 
 group = "com.cppcxy"
 val emmyluaAnalyzerVersion = "0.7.3"
 val emmyDebuggerVersion = "1.8.3"
-val selfVersion = "0.8.5"
+val selfVersion = "0.8.6"
 
 val emmyluaAnalyzerProjectUrl = "https://github.com/CppCXY/EmmyLuaAnalyzer"
 val emmyluaCodeStyleProjectUrl = "https://github.com/CppCXY/EmmyLuaCodeStyle"
@@ -169,6 +169,10 @@ sourceSets {
 }
 
 tasks {
+    buildSearchableOptions {
+        enabled = false
+    }
+    
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = buildVersionData.jvmTarget
     }

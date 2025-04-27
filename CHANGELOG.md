@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.8.6
+### New
+* 支持IDEA2025.1
+
 ## 0.8.5
 ### New
 * 增加EmmyLua自定义协议处理
